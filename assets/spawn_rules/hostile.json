@@ -1,0 +1,31 @@
+{
+  "overall": {
+    "local_range_chunks": 5,
+    "spawn_cap": 40,
+    "spawn_interval_ticks": 3,
+    "attempts_per_cycle": 18,
+    "min_player_distance": 10.0,
+    "require_surface": false,
+    "spawner_interval_ticks": 20,
+    "spawner_radius": 8,
+    "spawner_cap": 8
+  },
+  "mobs": [
+    {
+      "id": "minecraft:zombie_group",
+      "entity": "minecraft:zombie",
+      "enabled": true,
+      "weight": 12,
+      "min_count": 1,
+      "max_count": 2,
+      "conditions": {
+        "require_air_space": true,
+        "require_solid_below": true,
+        "deny_fluids": true,
+        "max_block_light": 0,
+        "max_sky_light": 1,
+        "use_sky_intensity": true
+      }
+    }
+  ]
+}

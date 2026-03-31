@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:generic",
+  "pools": [
+    {
+      "entries": [
+        {
+          "item": "minecraft:wheat_seeds",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.5
+        }
+      ],
+      "entries": [
+        {
+          "item": "minecraft:wheat_seeds",
+          "count": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "replace": true,
+  "values": [
+    "minecraft:bedrock",
+    "air",
+    "minecraft:water_still"
+  ]
+}

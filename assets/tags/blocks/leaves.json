@@ -1,0 +1,7 @@
+{
+  "replace": true,
+  "values": [
+    "minecraft:oak_leaves",
+    "minecraft:jungle_leaves"
+  ]
+}

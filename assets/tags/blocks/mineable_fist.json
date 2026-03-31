@@ -1,0 +1,28 @@
+{
+  "replace": true,
+  "values": [
+    "#minecraft:planks",
+    "minecraft:dirt",
+    "minecraft:grass_block",
+    "minecraft:sand",
+    "minecraft:clay",
+    "minecraft:tall_grass",
+    "minecraft:short_grass",
+    "minecraft:oak_leaves",
+    "minecraft:oak_log",
+    "minecraft:jungle_leaves",
+    "minecraft:wheat",
+    "minecraft:bamboo",
+    "minecraft:jungle_sapling",
+    "minecraft:crafting_table",
+    "minecraft:barrel",
+    "minecraft:oak_stairs",
+    "minecraft:coarse_dirt",
+    "minecraft:gravel",
+    "minecraft:mud",
+    "minecraft:mycelium",
+    "minecraft:podzol",
+    "minecraft:snow",
+    "minecraft:red_sand"
+  ]
+}

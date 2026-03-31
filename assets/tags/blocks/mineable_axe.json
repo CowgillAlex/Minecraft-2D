@@ -1,0 +1,21 @@
+{
+  "replace": true,
+  "values": [
+    "minecraft:oak_log",
+    "minecraft:jungle_log",
+    "minecraft:oak_planks",
+    "minecraft:oak_slab",
+    "minecraft:oak_stairs",
+    "minecraft:jungle_planks",
+    "minecraft:bamboo_planks",
+    "minecraft:bamboo_block",
+    "minecraft:bamboo_mosaic",
+    "minecraft:oak_door",
+    "minecraft:jungle_door",
+    "minecraft:bamboo_door",
+    "minecraft:crafting_table",
+    "minecraft:barrel",
+    "minecraft:ladder",
+    "minecraft:hay_block"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "replace": true,
+  "values": [
+    "minecraft:oak_planks",
+    "minecraft:jungle_planks",
+    "minecraft:bamboo_planks",
+    "minecraft:bamboo_mosaic"
+  ]
+}

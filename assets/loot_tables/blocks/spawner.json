@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "conditions": [
+        {
+          "condition": "minecraft:tool_tier_at_least",
+          "tool": "pickaxe",
+          "tier": "wood"
+        }
+      ],
+      "entries": [
+
+      ]
+    }
+  ]
+}

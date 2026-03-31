@@ -1,0 +1,42 @@
+{
+  "overall": {
+    "local_range_chunks": 4,
+    "spawn_cap": 6,
+    "spawn_interval_ticks": 120,
+    "attempts_per_cycle": 2,
+    "min_player_distance": 12.0,
+    "require_surface": true
+  },
+  "mobs": [
+    {
+      "id": "minecraft:cow_group",
+      "entity": "minecraft:cow",
+      "enabled": true,
+      "weight": 10,
+      "min_count": 1,
+      "max_count": 2,
+      "conditions": {
+        "require_air_space": true,
+        "require_solid_below": true,
+        "deny_fluids": true,
+        "block_below": "minecraft:grass_block",
+        "min_sky_light": 4
+      }
+    },
+    {
+      "id": "minecraft:pig_group",
+      "entity": "minecraft:pig",
+      "enabled": true,
+      "weight": 10,
+      "min_count": 1,
+      "max_count": 2,
+      "conditions": {
+        "require_air_space": true,
+        "require_solid_below": true,
+        "deny_fluids": true,
+        "block_below": "minecraft:grass_block",
+        "min_sky_light": 4
+      }
+    }
+  ]
+}

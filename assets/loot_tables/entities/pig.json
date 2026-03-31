@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "entries": [
+        {
+          "item": "minecraft:pig_spawn_egg",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.5
+        }
+      ],
+      "entries": [
+        {
+          "item": "minecraft:pig_spawn_egg",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.5
+        }
+      ],
+      "entries": [
+        {
+          "item": "minecraft:pig_spawn_egg",
+          "count": 1
+        }
+      ]
+    }
+  ]
+}

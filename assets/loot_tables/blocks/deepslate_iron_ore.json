@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "conditions": [
+        {
+          "condition": "minecraft:tool_tier_at_least",
+          "tool": "pickaxe",
+          "tier": "stone"
+        }
+      ],
+      "entries": [
+        {
+          "item": "minecraft:raw_iron",
+          "count": 1
+        }
+      ]
+    }
+  ]
+}

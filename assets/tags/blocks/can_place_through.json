@@ -1,0 +1,8 @@
+{
+  "replace": true,
+  "values": [
+    "air",
+    "minecraft:water_still",
+    "minecraft:water_flow"
+  ]
+}

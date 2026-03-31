@@ -1,0 +1,93 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "conditions": [
+        {
+          "condition": "minecraft:block_state",
+          "state": {
+            "age": "7"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "item": "minecraft:wheat",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "conditions": [
+        {
+          "condition": "minecraft:block_state",
+          "state": {
+            "age": "7"
+          }
+        },
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.5
+        }
+      ],
+      "entries": [
+        {
+          "item": "minecraft:wheat",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "conditions": [
+        {
+          "condition": "minecraft:block_state",
+          "state": {
+            "age": "7"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "item": "minecraft:wheat_seeds",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "conditions": [
+        {
+          "condition": "minecraft:block_state",
+          "state": {
+            "age": "7"
+          }
+        },
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.5
+        }
+      ],
+      "entries": [
+        {
+          "item": "minecraft:wheat_seeds",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_not",
+          "state": {
+            "age": "7"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "item": "minecraft:wheat_seeds",
+          "count": 1
+        }
+      ]
+    }
+  ]
+}

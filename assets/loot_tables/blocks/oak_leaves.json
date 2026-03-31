@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "conditions": [
+        {
+          "condition": "minecraft:tool_tier_at_least",
+          "tool": "hoe",
+          "tier": "wood"
+        }
+      ],
+      "entries": [
+        {
+          "item": "minecraft:oak_leaves",
+          "count": 1
+        }
+      ]
+    }
+  ]
+}
