@@ -18,11 +18,25 @@ import dev.alexco.registry.ResourceLocation;
 
 public class SoundLoader {
     private static final List<String> soundPaths = new ArrayList<>();
+    private static final ResourceLocation FALLBACK_SOUND_ID = new ResourceLocation("minecraft", "empty");
+
+    /**
+     * Ensures the sound registry always has at least one entry so registry
+     * validation does not fail when external assets are unavailable.
+     */
+    private static void ensureFallbackRegistered() {
+        if (Registry.SOUND.get(FALLBACK_SOUND_ID) == null) {
+            Registry.SOUND.register(Registry.SOUND, FALLBACK_SOUND_ID.toString(), Sounds.EMPTY);
+            System.out.println("Registered fallback sound: " + FALLBACK_SOUND_ID);
+        }
+    }
 
     /**
      * Loads and registers all Minecraft ogg assets from the newest local asset index.
      */
     public static void loadSounds() {
+        ensureFallbackRegistered();
+
         File indexesFolder = new File(System.getProperty("user.home") + "/AppData/roaming/.minecraft/assets/indexes");
         System.out.println("Looking for sound indexes in: " + indexesFolder.getAbsolutePath());
         File[] indexFiles = indexesFolder.listFiles((dir, name) -> name.endsWith(".json"));

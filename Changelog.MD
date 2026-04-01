@@ -998,9 +998,20 @@ New biomes added:
 - Fixed potential crashes from invalid item stack merge attempts.
 - Fixed selector world-bound checks using stale coordinates.
 - Fixed collision/debug AABB release paths to avoid stale pooled bounding boxes.
-- Fixed wording in splash text from "Less polygons!" to "Fewer polygons!".
+
 
 # 1.0-rc-1
 - This is the final version before 1.0.
 - Added readme and contribution guidelines.
 - Added better code docs.
+
+
+# 1.0-rc-2
+## Additions
+- Added f3 toggle for debug infos
+## Bugs Fixed
+- Fixed chunks with too many blocks not building
+- Fixed starter inventory being enabled by default
+
+# 1.0-rc-3
+- Fixed registry validation error when launching game if the .minecraft folder does not exist preventing the game from starting.
