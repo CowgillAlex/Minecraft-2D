@@ -44,7 +44,7 @@ public class MoreWorldOptionsScreen extends RenderableLifecycle {
     private int randomTickSpeed = 3;
     private boolean passiveMobSpawningEnabled = true;
     private boolean hostileMobSpawningEnabled = true;
-    private boolean starterInventoryEnabled = true;
+    private boolean starterInventoryEnabled = false;
     private int passiveSpawnIntervalTicks = 120;
     private int hostileSpawnIntervalTicks = 8;
     private int passiveMobCap = 6;
@@ -129,7 +129,7 @@ public class MoreWorldOptionsScreen extends RenderableLifecycle {
         grid.addButton(worldTypeButton);
 
         startInvButton = new Button(buttonNormal, buttonHighlighted, buttonDisabled,
-                0, "Starter Inventory: ON", this::toggleStarterInventory, 2f, Button.Alignment.LEFT, 0);
+            0, "Starter Inventory: OFF", this::toggleStarterInventory, 2f, Button.Alignment.LEFT, 0);
         grid.addButton(startInvButton);
 
         doneButton = new Button(buttonNormal, buttonHighlighted, buttonDisabled,
@@ -153,6 +153,7 @@ public class MoreWorldOptionsScreen extends RenderableLifecycle {
         randomTickSpeedField.setText("3");
         passiveMobSpawningEnabled = true;
         hostileMobSpawningEnabled = true;
+        starterInventoryEnabled = false;
         passiveSpawnIntervalTicks = passiveDefaults.getSpawnIntervalTicks();
         hostileSpawnIntervalTicks = hostileDefaults.getSpawnIntervalTicks();
         passiveMobCap = passiveDefaults.getSpawnCap();

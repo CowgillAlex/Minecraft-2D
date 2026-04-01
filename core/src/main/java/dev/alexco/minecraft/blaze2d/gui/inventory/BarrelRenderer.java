@@ -178,7 +178,7 @@ public class BarrelRenderer extends ContainerRenderer {
 
         spriteBatch.end();
 
-        if (DEBUG_SLOTS) {
+        if (DEBUG_SLOTS && shapeRenderer != null && Minecraft.getInstance().isDebugHudVisible()) {
             renderDebugSlots();
         }
     }

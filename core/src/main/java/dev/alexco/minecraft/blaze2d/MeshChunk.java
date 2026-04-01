@@ -1,11 +1,8 @@
 package dev.alexco.minecraft.blaze2d;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import static dev.alexco.minecraft.SharedConstants.*;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
@@ -27,7 +24,7 @@ public class MeshChunk {
     private short[] indexBuffer;
     private int vertexCount;
     private int indexCount;
-    private short vertIndex;
+    private int vertIndex;
     public Mesh mesh;
     private Chunk chunkRef;
     private BlockTextureAtlas atlas;
@@ -35,8 +32,13 @@ public class MeshChunk {
 
     private static final int FLOATS_PER_VERTEX = 11;
     private static final float BACKGROUND_BLOCK_LIGHT_FACTOR = 0.25f;
+    private static final int MAX_INDEXABLE_VERTICES = 65_535;
+    // Grow in fixed 16x16x2 block chunks instead of doubling.
+    private static final int BUFFER_GROWTH_BLOCKS = CHUNK_WIDTH * CHUNK_WIDTH * 2;
     private final int maxVertices;
+    private final int initialIndexCapacity;
     private volatile boolean disposed;
+    private boolean loggedVertexLimit;
 
     public MeshChunk(Chunk chunkRef, BlockTextureAtlas atlas) {
         this.chunkRef = chunkRef;
@@ -44,10 +46,13 @@ public class MeshChunk {
         this.atlas = atlas;
 
         int maxBlocks = CHUNK_WIDTH * CHUNK_HEIGHT;
-        this.maxVertices = maxBlocks * 4;
+        // Base capacity: foreground + background layers.
+        this.maxVertices = maxBlocks * 8;
+        this.initialIndexCapacity = maxBlocks * 12;
         vertexBuffer = new float[maxVertices * FLOATS_PER_VERTEX];
-        indexBuffer = new short[maxBlocks * 6];
+        indexBuffer = new short[initialIndexCapacity];
         this.disposed = false;
+        this.loggedVertexLimit = false;
     }
 
     /**
@@ -82,17 +87,16 @@ public class MeshChunk {
         if (disposed || chunkRef.isUnloaded()) {
             return;
         }
-        if (vertexBuffer == null){
 
-
-        int maxBlocks = CHUNK_WIDTH * CHUNK_HEIGHT;
-        vertexBuffer = new float[maxVertices * FLOATS_PER_VERTEX];
-        indexBuffer = new short[maxBlocks * 6];
-
+        if (vertexBuffer == null) {
+            vertexBuffer = new float[maxVertices * FLOATS_PER_VERTEX];
+            indexBuffer = new short[initialIndexCapacity];
         }
+
         vertexCount = 0;
         indexCount = 0;
         vertIndex = 0;
+        loggedVertexLimit = false;
         for (int x = 0; x < CHUNK_WIDTH; x++) {
             for (int y = 0; y < CHUNK_HEIGHT; y++) {
                 BlockState bgBlockState = chunkRef.getBackgroundBlockAt(x, y);
@@ -351,6 +355,8 @@ public class MeshChunk {
         int skyLight = (packedLight >> 4) & 0xF;
         int blockLight = packedLight & 0xF;
 
+        ensureVertexCapacity(FLOATS_PER_VERTEX);
+
         vertexBuffer[vertexCount++] = x;
         vertexBuffer[vertexCount++] = y;
         vertexBuffer[vertexCount++] = 0f;
@@ -368,13 +374,46 @@ public class MeshChunk {
      * Adds two triangles for the latest four queued vertices.
      */
     private void addQuadIndices() {
-        indexBuffer[indexCount++] = vertIndex;
+        if (vertIndex > MAX_INDEXABLE_VERTICES - 4) {
+            // Rewind the last quad's vertices; this mesh uses 16-bit indices.
+            vertexCount -= 4 * FLOATS_PER_VERTEX;
+            if (!loggedVertexLimit) {
+                Logger.ERROR("Chunk %d exceeded mesh vertex limit (%d), truncating extra geometry",
+                        chunkPos, MAX_INDEXABLE_VERTICES);
+                loggedVertexLimit = true;
+            }
+            return;
+        }
+
+        ensureIndexCapacity(6);
+        short base = (short) vertIndex;
+        indexBuffer[indexCount++] = base;
         indexBuffer[indexCount++] = (short) (vertIndex + 1);
         indexBuffer[indexCount++] = (short) (vertIndex + 2);
         indexBuffer[indexCount++] = (short) (vertIndex + 2);
         indexBuffer[indexCount++] = (short) (vertIndex + 3);
-        indexBuffer[indexCount++] = vertIndex;
+        indexBuffer[indexCount++] = base;
         vertIndex += 4;
+    }
+
+    private void ensureVertexCapacity(int additionalFloats) {
+        int required = vertexCount + additionalFloats;
+        if (required <= vertexBuffer.length) {
+            return;
+        }
+        int growthFloats = BUFFER_GROWTH_BLOCKS * 4 * FLOATS_PER_VERTEX;
+        int newLength = Math.max(required, vertexBuffer.length + growthFloats);
+        vertexBuffer = Arrays.copyOf(vertexBuffer, newLength);
+    }
+
+    private void ensureIndexCapacity(int additionalIndices) {
+        int required = indexCount + additionalIndices;
+        if (required <= indexBuffer.length) {
+            return;
+        }
+        int growthIndices = BUFFER_GROWTH_BLOCKS * 6;
+        int newLength = Math.max(required, indexBuffer.length + growthIndices);
+        indexBuffer = Arrays.copyOf(indexBuffer, newLength);
     }
 
     /**

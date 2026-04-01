@@ -52,7 +52,6 @@ public class DebugScreenRenderer extends RenderableLifecycle {
         int playerX = (int) Math.floor(Minecraft.getInstance().getPlayer().x);
         int playerY = (int) Math.floor(Minecraft.getInstance().getPlayer().y);
 
-        drawTextWithBackground(String.format("Paper Minecraft: §6%s", Version.VERSION_STRING), 0, false);
         drawTextWithBackground(String.format(
                 "FPS: §6%d§f, TPS: §6%d§f, ticks: §6%d§f, state: §6%s",
                 Gdx.graphics.getFramesPerSecond(),
@@ -75,30 +74,39 @@ public class DebugScreenRenderer extends RenderableLifecycle {
                 76 + (38 * 5),
                 false);
 
-        drawTextWithBackground(String.format("AABB Pool: §6%d§f/§650000 §7(§fAcq:§6%d§7, Rel:§6%d§7, Net:§6%d§7)",
-                AABBPool.AABBpool.getPoolSize(),
-                AABBPool.getTotalAcquired(),
-                AABBPool.getTotalReleased(),
-                AABBPool.getNetChange()),
-                76 + (38 * 6),
-                false);
-        int solidAabbPoolSize = SolidityAABB.getPoolSize();
-        if (solidAabbPoolSize >= 0) {
-            drawTextWithBackground(String.format("SolidAABB Pool: §6%d§f/§64000",
-                    solidAabbPoolSize),
-                    76 + (38 * 7),
-                    false);
-        } else {
-            drawTextWithBackground("SolidAABB: §6no pooling§f (fresh instances)",
-                    76 + (38 * 7),
-                    false);
-        }
+        // drawTextWithBackground(String.format("AABB Pool: §6%d§f/§650000 §7(§fAcq:§6%d§7, Rel:§6%d§7, Net:§6%d§7)",
+        //         AABBPool.AABBpool.getPoolSize(),
+        //         AABBPool.getTotalAcquired(),
+        //         AABBPool.getTotalReleased(),
+        //         AABBPool.getNetChange()),
+        //         76 + (38 * 6),
+        //         false);
+        // int solidAabbPoolSize = SolidityAABB.getPoolSize();
+        // if (solidAabbPoolSize >= 0) {
+        //     drawTextWithBackground(String.format("SolidAABB Pool: §6%d§f/§64000",
+        //             solidAabbPoolSize),
+        //             76 + (38 * 7),
+        //             false);
+        // } else {
+        //     drawTextWithBackground("SolidAABB: §6no pooling§f (fresh instances)",
+        //             76 + (38 * 7),
+        //             false);
+        // }
 
 
         drawTextWithBackground(getBiomeDebugInfo(playerX), 76 + (38 * 3), true);
         drawTextWithBackground(getNoiseDebugInfo(playerX), 76 + (38 * 4), true);
         drawTextWithBackground(getTerrainDebugInfo(playerX, playerY), 76 + (38 * 5), true);
 
+        spriteBatch.end();
+    }
+
+    /**
+     * Draws only the version badge and keeps it visible even when debug details are hidden.
+     */
+    public void drawVersionLine() {
+        spriteBatch.begin();
+        drawTextWithBackground(String.format("Paper Minecraft: §6%s", Version.VERSION_STRING), 0, false);
         spriteBatch.end();
     }
 

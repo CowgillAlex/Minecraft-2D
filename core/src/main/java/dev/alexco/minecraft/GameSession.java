@@ -163,9 +163,14 @@ public class GameSession {
         }
 
         selectorRenderer.draw();
-        aabbRenderer.draw();
-        debugScreenRenderer.draw();
-        hitboxRenderer.draw();
+        debugScreenRenderer.drawVersionLine();
+
+        if (mc.isDebugHudVisible()) {
+            aabbRenderer.draw();
+            debugScreenRenderer.draw();
+            hitboxRenderer.draw();
+        }
+
         cowRenderer.draw();
         zombieRenderer.draw();
         pigRenderer.draw();

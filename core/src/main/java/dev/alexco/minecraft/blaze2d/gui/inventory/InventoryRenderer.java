@@ -186,7 +186,7 @@ public class InventoryRenderer extends ContainerRenderer {
         spriteBatch.end();
 
 
-        if (DEBUG_SLOTS) {
+        if (DEBUG_SLOTS && shapeRenderer != null && Minecraft.getInstance().isDebugHudVisible()) {
             shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
             shapeRenderer.setColor(Color.GREEN);
 

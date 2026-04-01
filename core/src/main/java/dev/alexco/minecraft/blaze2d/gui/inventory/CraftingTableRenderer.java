@@ -202,7 +202,7 @@ public class CraftingTableRenderer extends ContainerRenderer {
         spriteBatch.end();
 
         // Debug: Draw slot outlines
-        if (DEBUG_SLOTS) {
+        if (DEBUG_SLOTS && shapeRenderer != null && Minecraft.getInstance().isDebugHudVisible()) {
             shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
 
             shapeRenderer.setColor(Color.GREEN);

@@ -82,6 +82,7 @@ public class Minecraft implements ApplicationListener {
     //one texture atlas instance
     public BlockTextureAtlas atlas;
     public Section tickSection;
+    private boolean debugHudVisible = false;
 
     private HotbarRenderer hotbarRenderer;
     private InventoryRenderer inventoryRenderer;
@@ -124,6 +125,7 @@ public class Minecraft implements ApplicationListener {
         this.debugOverlay = new DebugOverlay();
         root = debugOverlay.addSection("Root", Color.RED);
         debugOverlay.create();
+        debugOverlay.setVisible(debugHudVisible);
 
         this.splashScreenRenderer = new SplashScreenRenderer();
         splashScreenRenderer.create();
@@ -252,6 +254,7 @@ public class Minecraft implements ApplicationListener {
         craftingTableRenderer = new CraftingTableRenderer();
 
         debugOverlay.create();
+        debugOverlay.setVisible(debugHudVisible);
         titleScreen.create();
         worldSelectionScreen.create();
         worldCreationScreen.create();
@@ -405,6 +408,11 @@ public class Minecraft implements ApplicationListener {
         }
 
         if (session.isActive()) {
+            if (Gdx.input.isKeyJustPressed(Keys.F3)) {
+                debugHudVisible = !debugHudVisible;
+                debugOverlay.setVisible(debugHudVisible);
+            }
+
             root.start();
             //tick (20)
             session.tick();
@@ -454,7 +462,9 @@ public class Minecraft implements ApplicationListener {
             }
 
             root.stop();
-            debugOverlay.render();
+            if (debugHudVisible) {
+                debugOverlay.render();
+            }
         }
     }
     //empty because we have to fulfil the contract, but we arent making an android game
@@ -555,6 +565,10 @@ public class Minecraft implements ApplicationListener {
 
     public MoreWorldOptionsScreen getMoreWorldOptionsScreen() {
         return moreWorldOptionsScreen;
+    }
+
+    public boolean isDebugHudVisible() {
+        return debugHudVisible;
     }
 
     /**

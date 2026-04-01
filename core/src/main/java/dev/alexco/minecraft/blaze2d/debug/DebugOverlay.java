@@ -79,6 +79,14 @@ public class DebugOverlay extends RenderableLifecycle {
         visible = !visible;
     }
 
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
     @Override
     public void render() {
         if (!visible) return;

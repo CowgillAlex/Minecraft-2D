@@ -191,7 +191,7 @@ public class FurnaceRenderer extends ContainerRenderer {
 
         spriteBatch.end();
 
-        if (DEBUG_SLOTS) {
+        if (DEBUG_SLOTS && shapeRenderer != null && Minecraft.getInstance().isDebugHudVisible()) {
             renderDebugSlots();
         }
     }
